@@ -1,0 +1,50 @@
+scalar DateTime
+scalar JSON
+
+type AccountDataType
+{
+    created_at: DateTime!
+    email: String
+    first_name: String!
+    id: Int!
+    last_name: String!
+    phone_number: String
+    updated_at: DateTime!
+    verified: Boolean!
+}
+
+type AccountType
+{
+    neuronArrayData: [AccountDataType!]
+    neuronData: AccountDataType
+    statusCode: Int
+}
+
+type AuthType
+{
+    message: JSON
+    neuronData: JSON
+    statusCode: Int
+}
+
+input AuthenticationInput
+{
+    code: Int
+    confirmPassword: String
+    email: String!
+    firstName: String
+    lastName: String
+    password: String
+}
+
+type Mutation
+{
+    authentication(authenticationWithEmailInput: AuthenticationInput!): AuthType!
+    refreshToken: AuthType!
+}
+
+type Query
+{
+    getCurrentAccount: AccountType!
+    logout: AuthType!
+}

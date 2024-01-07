@@ -1,0 +1,55 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type AccountDataType {
+  created_at: DateTime!
+  email: String
+  first_name: String!
+  id: Int!
+  last_name: String!
+  phone_number: String
+  updated_at: DateTime!
+  verified: Boolean!
+}
+
+type AccountType {
+  neuronArrayData: [AccountDataType!]
+  neuronData: AccountDataType
+  statusCode: Int
+}
+
+type AuthType {
+  message: JSON
+  neuronData: JSON
+  statusCode: Int
+}
+
+input AuthenticationInput {
+  code: Int
+  confirmPassword: String
+  email: String!
+  firstName: String
+  lastName: String
+  password: String
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""
+The `JSON` scalar type represents JSON values as specified by [ECMA-404](http://www.ecma-international.org/publications/files/ECMA-ST/ECMA-404.pdf).
+"""
+scalar JSON
+
+type Mutation {
+  authentication(authenticationWithEmailInput: AuthenticationInput!): AuthType!
+  refreshToken: AuthType!
+}
+
+type Query {
+  getCurrentAccount: AccountType!
+  logout: AuthType!
+}
